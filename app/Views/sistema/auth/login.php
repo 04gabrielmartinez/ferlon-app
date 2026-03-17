@@ -47,7 +47,6 @@ if ($logoPath !== '' && $logoPath[0] !== '/') {
                     type="text"
                     id="email"
                     name="email"
-                    placeholder="gmartinez o gmartinez@cellphone.do"
                     value="<?= htmlspecialchars($correoBloqueado) ?>"
                     class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-700 outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-200"
                     <?= $paso2fa ? 'disabled' : 'required' ?>
@@ -97,11 +96,5 @@ if ($logoPath !== '' && $logoPath[0] !== '/') {
                 </button>
             <?php endif; ?>
         </form>
-
-        <?php if (!$paso2fa): ?>
-            <p class="mt-5 text-center text-xs text-gray-400">
-                <?= $twoFactorEnabled ? '2FA activo.' : '2FA desactivado por ahora.' ?>
-            </p>
-        <?php endif; ?>
     </main>
 </section>
