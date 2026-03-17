@@ -1,0 +1,41 @@
+CREATE TABLE IF NOT EXISTS recetas_producto_final (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    marca_id BIGINT UNSIGNED NULL,
+    familia_id BIGINT UNSIGNED NULL,
+    producto_articulo_id BIGINT UNSIGNED NOT NULL,
+    presentacion_id BIGINT UNSIGNED NOT NULL,
+    empaque_id BIGINT UNSIGNED NOT NULL,
+    rendimiento DECIMAL(18,4) NOT NULL DEFAULT 1.0000,
+    unidad_rendimiento VARCHAR(5) NOT NULL DEFAULT 'kg',
+    created_by BIGINT UNSIGNED NULL,
+    updated_by BIGINT UNSIGNED NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_recetas_producto_final_variante (producto_articulo_id, presentacion_id, empaque_id),
+    KEY idx_recetas_producto_final_marca (marca_id),
+    KEY idx_recetas_producto_final_familia (familia_id),
+    KEY idx_recetas_producto_final_presentacion (presentacion_id),
+    KEY idx_recetas_producto_final_empaque (empaque_id),
+    CONSTRAINT fk_recetas_producto_final_marca FOREIGN KEY (marca_id) REFERENCES marcas(id) ON DELETE SET NULL,
+    CONSTRAINT fk_recetas_producto_final_familia FOREIGN KEY (familia_id) REFERENCES familias(id) ON DELETE SET NULL,
+    CONSTRAINT fk_recetas_producto_final_producto FOREIGN KEY (producto_articulo_id) REFERENCES articulos(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_recetas_producto_final_presentacion FOREIGN KEY (presentacion_id) REFERENCES presentaciones(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_recetas_producto_final_empaque FOREIGN KEY (empaque_id) REFERENCES empaques(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_recetas_producto_final_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
+    CONSTRAINT fk_recetas_producto_final_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS recetas_producto_final_detalles (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    receta_producto_final_id BIGINT UNSIGNED NOT NULL,
+    insumo_articulo_id BIGINT UNSIGNED NOT NULL,
+    cantidad DECIMAL(18,4) NOT NULL,
+    unidad VARCHAR(5) NOT NULL DEFAULT 'u',
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_receta_producto_final_detalle_insumo (receta_producto_final_id, insumo_articulo_id),
+    KEY idx_receta_producto_final_detalle_receta (receta_producto_final_id),
+    KEY idx_receta_producto_final_detalle_insumo (insumo_articulo_id),
+    CONSTRAINT fk_receta_producto_final_detalle_receta FOREIGN KEY (receta_producto_final_id) REFERENCES recetas_producto_final(id) ON DELETE CASCADE,
+    CONSTRAINT fk_receta_producto_final_detalle_insumo FOREIGN KEY (insumo_articulo_id) REFERENCES articulos(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -1,0 +1,19 @@
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: true,
+  },
+  build: {
+    outDir: 'public/build',
+    emptyOutDir: true,
+    manifest: true,
+    rollupOptions: {
+      input: {
+        app: 'resources/js/app.js',
+      },
+    },
+  },
+});

@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ferlon_app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: ferlon_db
+    environment:
+      MYSQL_DATABASE: ferlon
+      MYSQL_USER: ferlon
+      MYSQL_PASSWORD: ferlon
+      MYSQL_ROOT_PASSWORD: change_me
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

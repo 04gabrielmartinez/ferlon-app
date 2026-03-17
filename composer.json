@@ -1,0 +1,13 @@
+{
+  "name": "ferlon/fase1",
+  "description": "Fase 1 - Autenticación y dashboard protegido en PHP 8.2",
+  "type": "project",
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}
