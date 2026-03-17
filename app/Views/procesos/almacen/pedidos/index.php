@@ -124,7 +124,7 @@ $localidadesMap = is_array($localidadesMap ?? null) ? $localidadesMap : [];
     <input type="hidden" name="pedido_id" id="pedido_delete_id" value="">
 </form>
 
-<?php include dirname(__DIR__, 4) . '/sistema/components/client-picker-modal.php'; ?>
+<?php include dirname(__DIR__, 3) . '/sistema/components/client-picker-modal.php'; ?>
 
 <div class="modal fade employee-picker-modal" id="pedidoPickerModal" tabindex="-1" aria-labelledby="pedidoPickerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
